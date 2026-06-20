@@ -65,9 +65,7 @@ La arquitectura propuesta se fundamenta en el paradigma moderno de **Lakehouse**
 
 ---
 
----
-
-### 📊 4. RESULTADOS ANALÍTICOS (CONSUMO DE LA CAPA GOLD)
+### 📊 3.1. RESULTADOS ANALÍTICOS (CONSUMO DE LA CAPA GOLD)
 
 Como evidencia de la correcta implementación del pipeline y la disponibilidad de los datos en la **Capa Gold**, se conectó el entorno de **Google Colab** para generar la analítica descriptiva que guiará la toma de decisiones de la entidad ambiental. 
 
