@@ -2,7 +2,7 @@
 **Especialización en Analítica de Datos**  
 **Docente:** Yeis Livis Taborda Henao  
 **Periodo Académico:** 1 - 2026  
-**Estudiante:** Nicolle Gaviria  
+**Estudiante:** Nicolle Gaviria Mejia
 
 <img width="1024" height="1536" alt="Copilot_20260619_191352" src="https://github.com/user-attachments/assets/7a87f883-b65c-4a61-8f79-df6493dbcce7" />
 
@@ -43,7 +43,7 @@ El proyecto genera un **retorno del 271.2% en su primer año**, pagándose por c
 ### 📊 Diagrama de la Solución End-to-End (Estrategia Medallion)
 A continuación, se presenta el esquema gráfico de la arquitectura Lakehouse implementada en Databricks para el procesamiento de las alertas ambientales del departamento del Chocó:
 
-![Diagrama de Arquitectura Medallion](http://googleusercontent.com/image_collection/image_retrieval/11724265101778922897_0)
+<img width="1243" height="506" alt="Arquitectura Medallion" src="https://github.com/user-attachments/assets/27014e75-dbbb-42dc-9f91-b54196307783" />
 
 ---
 
@@ -62,3 +62,32 @@ La arquitectura propuesta se fundamenta en el paradigma moderno de **Lakehouse**
 * **Capa Silver (Calidad, Limpieza y Enriquecimiento):** El pipeline programado consume las tablas Bronze y ejecuta procesos de normalización. Utilizando funciones nativas de Spark, se eliminan los puntos de miles y se reemplazan las comas por puntos en la columna `AREA_Ha`, casteándola a un tipo de dato decimal numérico (`Double`). Asimismo, se limpian los valores nulos en el campo `CAUSA`, se unifican las cadenas de texto de los municipios para evitar duplicidades por tildes o espacios, y se reparan los registros de la columna `AÑO` que presentaban formatos decimales erróneos (transformándolos a enteros válidos).
 * **Capa Gold (Datos de Negocio / Agregación):** Los datos limpios de la capa Silver se someten a consultas de agregación (operaciones de agrupación y suma indexadas). Aquí se estructuran tablas analíticas optimizadas que pre-calculan las hectáreas deforestadas totales y el conteo de alertas específicas por cada Municipio y Año. 
 * **Capa de Consumo Final:** Las herramientas de visualización y el cuaderno científico de Google Colab consumen directamente las tablas Gold ya procesadas. Esto evita tener que recalcular las transformaciones matemáticas sobre las 7,937 filas originales en cada consulta, optimizando drásticamente el consumo de memoria y la velocidad de respuesta del sistema analítico regional para la toma de decisiones.
+
+---
+
+---
+
+### 📊 4. RESULTADOS ANALÍTICOS (CONSUMO DE LA CAPA GOLD)
+
+Como evidencia de la correcta implementación del pipeline y la disponibilidad de los datos en la **Capa Gold**, se conectó el entorno de **Google Colab** para generar la analítica descriptiva que guiará la toma de decisiones de la entidad ambiental. 
+
+Para asegurar la disponibilidad y evitar pérdidas de datos locales, el reporte se genera consumiendo de forma directa y remota el dataset alojado en este repositorio.
+
+#### 📈 Gráficos de Impacto Territorial y Causales
+
+A continuación, se presentan las visualizaciones de alta resolución obtenidas tras el procesamiento distribuido:
+
+| 📋 Gráfico A: Superficie Deforestada por Causa | 📍 Gráfico B: Top 5 Municipios Afectados |
+<img width="4752" height="1752" alt="GRAFICOS" src="https://github.com/user-attachments/assets/2a0814c5-ba89-4225-bb19-40bdf4195b77" />
+
+---
+
+#### 📝 Explicación y Hallazgos de Negocio para la Entidad Ambiental
+
+1. **Análisis del Impacto por Causa Principal (Gráfico Izquierdo):**
+   * **Hallazgo:** Aunque comúnmente se asocia la pérdida de bosque exclusivamente a los cultivos agrícolas directos, los datos analizados demuestran que los **Incendios** representan la mayor catástrofe en extensión territorial en el departamento del Chocó, superando las **25,000 hectáreas** destruidas de forma acumulada. La **Minería** se ubica como la segunda causa más crítica, rozando las **19,000 hectáreas**.
+   * **Acción Estratégica:** La corporación autónoma regional debe priorizar la asignación presupuestal hacia brigadas de prevención y mitigación de incendios forestales y control de minería ilegal, ya que allí se concentra el mayor impacto severo de pérdida de cobertura vegetal.
+
+2. **Análisis de Priorización Territorial - Top 5 Municipios (Gráfico Derecho):**
+   * **Hallazgo:** El análisis revela una concentración crítica del riesgo ambiental en zonas geográficas específicas. El municipio de **RIOSUCIO** lidera la alerta con una diferencia abrumadora, registrando más de **22,000 hectáreas** deforestadas. En segundo lugar se ubica el municipio de **UNGUÍA** con un aproximado de **12,500 hectáreas**.
+   * **Acción Estratégica:** Este comportamiento georreferenciado le permite a la entidad aplicar una estrategia de optimización de recursos. En lugar de dispersar el personal operativo en todo el departamento, se deben concentrar los esfuerzos de monitoreo satelital avanzado y comisiones de campo de forma inmediata en Riosucio y Unguía para contener los focos activos de deforestación.
